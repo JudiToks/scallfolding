@@ -1,16 +1,18 @@
 package connect;
 
+import Code.ConfigBdd;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectToBdd {
-    public Connection connectToPostgres() throws SQLException
+    public Connection connectToPostgres(ConfigBdd conf) throws SQLException
     {
         Connection connection = null;
-        String url = "jdbc:postgresql://localhost:5432/scallfolding";
-        String user = "postgres";
-        String password = "root";
+        String url = conf.getLink();
+        String user = conf.getUser();
+        String password = conf.getPwd();
         try
         {
             Class.forName("org.postgresql.Driver");
