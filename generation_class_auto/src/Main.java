@@ -17,8 +17,6 @@ public class Main
             config = code.readXMLDataBaseConfig();
             ConfigClasse conf_classe = code.readXMLConfig();
             Connection connection = connect.connectToPostgres(config);
-            System.out.println("test:"+conf_classe.getPath()+conf_classe.getTable().getPkg());
-            System.out.println("okok:"+conf_classe.getPath()+conf_classe.getTable().getPkg()+"/"+conf_classe.getTable().getTalbe_name()+".java");
             code.executeFramework(connection);
         }
         catch (Exception e)

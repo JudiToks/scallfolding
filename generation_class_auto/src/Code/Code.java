@@ -31,7 +31,7 @@ public class Code
                 conn = connection.connectToPostgres(config);
             }
             DatabaseMetaData metaData = conn.getMetaData();
-            ResultSet resultSet = metaData.getColumns(null, null, table_name, null);
+            ResultSet resultSet = metaData.getColumns(null, null, table_name.toLowerCase(), null);
             while (resultSet.next())
             {
                 String colonne_name = resultSet.getString("COLUMN_NAME");
@@ -150,7 +150,6 @@ public class Code
         try
         {
             boolean isChecked = checkIsOnBdd(table);
-            System.out.println("bool:"+isChecked);
             if (isChecked)
             {
                 File pkg = new File(conf_classe.getPath()+conf_classe.getTable().getPkg());
