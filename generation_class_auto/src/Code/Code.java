@@ -36,8 +36,11 @@ public class Code
             {
                 String colonne_name = resultSet.getString("COLUMN_NAME");
                 String colonne_type = resultSet.getString("TYPE_NAME");
-                all_colonne.add(colonne_name);
-                all_type.add(colonne_type);
+                DetailsTable details_table = new DetailsTable();
+                details_table.setColonne(colonne_name);
+                details_table.setType(colonne_type);
+                all_colonne.add(details_table.getColonne());
+                all_type.add(details_table.getType());
                 Table temp_table = new Table();
                 temp_table.setTalbe_name(table_name.substring(0, 1).toUpperCase() + table_name.substring(1));
                 temp_table.setColonne(all_colonne);
@@ -162,9 +165,28 @@ public class Code
                 {
                     file.createNewFile();
                 }
+                else
+                {
+                    System.out.println("Le classe existe deja!");
+                }
                 FileWriter writer = new FileWriter(file);
-                writer.write("public class "+conf_classe.getTable().getTalbe_name()+" {\n");
+                writer.write("package "+conf_classe.getTable().getPkg()+";\n\n");
+                writer.write("public class "+conf_classe.getTable().getTalbe_name()+" {\n\n");
+                for (int i = 0; i < table.getColonne().size(); i++)
+                {
+                    writer.write("\t"+table.getType().get(i)+" "+table.getColonne().get(i)+";\n");
+                }
                 writer.write("\n");
+                writer.write("\t// getters & setters\n");
+                for (int i = 0; i < table.getColonne().size(); i++)
+                {
+                    writer.write("\tpublic "+table.getType().get(i)+" get"+table.getColonne().get(i)+"() {\n");
+                    writer.write("\t\treturn this."+table.getColonne().get(i)+";\n");
+                    writer.write("\t}\n");
+                    writer.write("\tpublic void set"+table.getColonne().get(i)+"("+table.getType().get(i)+" "+table.getColonne().get(i)+") {\n");
+                    writer.write("\t\tthis."+table.getColonne().get(i)+" = "+table.getColonne().get(i)+";\n");
+                    writer.write("\t}\n");
+                }
                 writer.write("}\n");
                 writer.close();
                 isCreate = true;

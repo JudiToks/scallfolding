@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
+<!--    postgres uniquement    -->
     <databaseconfig>
         <databaselink>jdbc:postgresql://localhost:5432/scallfolding</databaselink>
         <user>postgres</user>
         <password>root</password>
     </databaseconfig>
     <config>
-        <table>emp</table>
-        <path>/Users/rajaonarisonmarcellajulie/Desktop/judi/prog/Mr_Naina/test_scallfolding/</path>
-        <package>Utils</package>
+        <table>article</table> <!-- nom de la table dans la base de donnees -->
+        <path>/Users/rajaonarisonmarcellajulie/Desktop/judi/prog/Mr_Naina/test_scallfolding/</path> <!-- emplacement du projet a creer -->
+        <package>utils</package> <!-- tout en majuscule -->
     </config>
 </configs>
